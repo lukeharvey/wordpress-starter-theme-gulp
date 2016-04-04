@@ -1,0 +1,17 @@
+scss_files: './src/sass/**/*.scss'
+
+exclude: './src/sass/vendor/*.scss'
+
+linters:
+  Comment:
+    enabled: false
+  StringQuotes:
+    enabled: false
+  LeadingZero:
+    style: include_zero
+  SelectorFormat:
+    enabled: false
+  NestingDepth:
+    enabled: false
+  HexLength:
+    style: long

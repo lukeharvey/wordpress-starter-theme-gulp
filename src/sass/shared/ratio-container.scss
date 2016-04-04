@@ -1,0 +1,35 @@
+/**
+ * Ratio container
+ *
+ * For maintaining intrinsic ratios to prevent repaints
+ */
+
+.RatioContainer {
+  background-color: $colour-grey-lightest;
+  display: block;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  width: 100%;
+
+  img {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.RatioContainer--white {
+  background-color: $colour-white;
+}
+
+/**
+ * 3by2 ratio modifier
+ */
+
+.RatioContainer--3by2 {
+  padding-bottom: 66.6666%;
+}
