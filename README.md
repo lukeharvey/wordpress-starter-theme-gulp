@@ -13,12 +13,12 @@ Features:
 
 ### Install pre-requisites
 
-- [Node.js](http://nodejs.org/) `brew install node`
-- Gulp `$ npm install -g gulp`
+- [Node](http://nodejs.org/) `$ brew install node`
+- [Gulp](http://gulpjs.com/) `$ npm install -g gulp`
 
-### Optional linters
-- ESLint & babel-eslint `$ npm install -g eslint babel-eslint`
-- Stylelint 'npm install -g stylelint'
+### (Optional) Install linters globally
+- [ESLint](http://eslint.org/) `$ npm install -g eslint`
+- [stylelint](http://stylelint.io/) `$ npm install -g stylelint`
 
 ### Setup
 ```
