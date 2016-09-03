@@ -99,10 +99,3 @@ function lh_category_transient_flusher() {
 }
 add_action( 'edit_category', 'lh_category_transient_flusher' );
 add_action( 'save_post',     'lh_category_transient_flusher' );
-
-/**
- * Output blank placeholder image for lazy loading
- */
-function lh_blank_placeholder_image() {
-  echo 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-}

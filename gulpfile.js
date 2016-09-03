@@ -20,6 +20,8 @@ var config = {
 };
 
 /**
+ * Help
+ *
  * List the available gulp tasks
  */
 
@@ -27,7 +29,9 @@ gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
 /**
- * Process the main Sass file and auto-inject into browsers
+ * Sass
+ *
+ * Complie and minify the Sass files and auto-inject into browsers
  */
 
 gulp.task('sass', function() {
@@ -39,7 +43,7 @@ gulp.task('sass', function() {
       precision: 10
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['last 2 versions']}))
-    .pipe($.cleanCss())
+    .pipe($.cssnano())
     .pipe($.rename('main.min.css'))
     .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('.'))
@@ -48,62 +52,97 @@ gulp.task('sass', function() {
 });
 
 /**
- * Lint all Sass files
+ * Lint Sass
+ *
+ * Lint the Sass files using Stylelint
  */
 
 gulp.task('lint-sass', function() {
   log('Linting all Sass files');
 
   return gulp.src('./src/sass/**/*.scss')
-    .pipe($.scssLint());
+    .pipe($.stylelint({
+      reporters: [{formatter: 'string', console: true}],
+      syntax: "scss"
+    }));
 });
 
 /**
- * Process the Javascript files
+ * JS Head
+ *
+ * Process the Javascript files for inclusion in the <head>
  */
 
- gulp.task('js', function() {
-   log('Processing JS');
+gulp.task('js-head', function() {
+  log('Processing JS head');
 
-   return gulp.src(['./src/js/vendor/*.js', './src/js/modules/*.js'])
-     .pipe($.sourcemaps.init())
-     .pipe($.babel())
-     .pipe($.concat('main.min.js'))
-     .pipe($.uglify({preserveComments: 'some'}))
-     .pipe($.size({title: 'scripts'}))
-     .pipe($.sourcemaps.write('.'))
-     .pipe(gulp.dest('./dist/js/'));
- });
+  return gulp.src(['./src/js/head/vendor/*.js', './src/js/head/modules/*.js'])
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('head.min.js'))
+    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist/js/'));
+});
+
+/**
+ * JS Main
+ *
+ * Process the main Javascript files
+ */
+
+gulp.task('js-main', function() {
+  log('Processing JS main');
+
+ return gulp.src(['./src/js/main/vendor/featherlight.js', './src/js/main/vendor/jquery.waypoints.js', './src/js/main/vendor/*.js', './src/js/main/modules/*.js'])
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('main.min.js'))
+    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist/js/'));
+});
 
  /**
-  * Lint the Javascript files
+  * Lint JS
+  *
+  * Lint the JavaScript files using ESLint
   */
 
  gulp.task('lint-js', function() {
-   gulp.src(['./src/js/modules/*.js'])
+  log('Linting the JavaScript files');
+
+  return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
      .pipe($.eslint())
      .pipe($.eslint.format())
-     .pipe($.eslint.failAfterError())
-     .pipe($.jscs())
-     .pipe($.jscs.reporter('fail'));
+     .pipe($.eslint.failAfterError());
  });
 
 /**
+ * Build
+ *
  * Build everything
  */
 
 gulp.task('build', function(done) {
-  runSequence('sass', 'js', done);
+  runSequence('sass', 'js-head', 'js-main', done);
 });
 
-gulp.task('serve', ['sass', 'js'], function() {
+/**
+ * Serve
+ *
+ * Run a Browsersync server and watch all the files.
+ */
+
+gulp.task('serve', ['sass', 'js-head', 'js-main'], function() {
 
   browserSync.init({
     proxy: config.url
   });
 
   gulp.watch(['./src/sass/**/*.scss'], ['sass']);
-  gulp.watch(['./src/js/**/*.js'], ['js', browserSync.reload]);
+  gulp.watch(['./src/js/head/**/*.js'], ['js-head', browserSync.reload]);
+  gulp.watch(['./src/js/main/**/*.js'], ['js-main', browserSync.reload]);
   gulp.watch(['./**/*.php']).on('change', browserSync.reload);
 
 });

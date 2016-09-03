@@ -23,20 +23,20 @@
  * Lazysizes config
  */
 
-// img[data-sizes="auto"] {
-//   display: block;
-//   width: 100%;
-// }
+img[data-sizes="auto"] {
+  display: block;
+  width: 100%;
+}
 
-// .lazyload,
-// .lazyloading {
-//   opacity: 0;
-// }
+.lazyload,
+.lazyloading {
+  opacity: 0;
+}
 
-// .lazyloaded {
-//   opacity: 1;
-//   transition: opacity 300ms;
-// }
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 300ms;
+}
 
 /**
  * Prevent Typekit FOUT

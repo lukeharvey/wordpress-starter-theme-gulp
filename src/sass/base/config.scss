@@ -12,18 +12,22 @@
 // }
 
 /**
- * Colours
+ * Grayscale
  */
 
 $colour-black: #2a2a2a; // rgb(42, 42, 42)
 $colour-grey-darkest: #3d3d3d; // rgb(61, 61, 61)
 $colour-grey-darker: #525252; // rgb(82, 82, 82)
-$colour-grey-dark: #666666; // rgb(102, 102, 102)
+$colour-grey-dark: #666; // rgb(102, 102, 102)
 $colour-grey: #7a7a7a; // rgb(122, 122, 122)
 $colour-grey-light: #a4a4a4; // rgb(164, 164, 164)
-$colour-grey-lighter: #cccccc; // rgb(204, 204, 204)
+$colour-grey-lighter: #ccc; // rgb(204, 204, 204)
 $colour-grey-lightest: #f4f4f4; // rgb(244, 244, 244)
-$colour-white: #ffffff; // rgb(255, 255, 255)
+$colour-white: #fff; // rgb(255, 255, 255)
+
+/**
+ * Colours
+ */
 
 /**
  * Font families
@@ -43,31 +47,32 @@ $font-size-small: 0.875rem; // 14px
 $font-size-default: 1rem; // 16px
 $font-size-large: 1.25rem; // 20px
 $font-size-larger: 1.5rem; // 24px
-$font-size-big: 2rem; // 32px
-$font-size-bigger: 3rem; // 48px
+$font-size-big: 1.75rem; // 28px
+$font-size-bigger: 2.25rem; // 36px
 $font-size-huge: 4rem; // 64px
 
 /**
  * Font weights
  */
 
-$font-weight-normal: 400;
+$font-weight-default: 400;
 $font-weight-bold: 800;
 
 /**
  * Line-heights
  */
 
+$line-height-tight: 1.25;
 $line-height-default: 1.5;
 
 /**
  * Breakpoints
  */
 
-$viewport-smaller: 480px;
+$viewport-smaller: 400px;
 $viewport-small: 600px;
-$viewport-large: 800px;
-$viewport-larger: 992px;
-$viewport-big: 1200px;
-$viewport-bigger: 1400px;
-$viewport-huge: 1600px;
+$viewport-medium: 900px;
+$viewport-large: 1200px;
+$viewport-larger: 1400px;
+$viewport-big: 1920px;
+$viewport-bigger: 2560px;

@@ -1,20 +1,26 @@
 @import "vendor/sanitize";
+
+/* base */
+
 @import "base/config";
 @import "base/base";
 @import "base/utilities";
 
-@import "shared/form";
-@import "shared/grid";
-@import "shared/placeholder";
-@import "shared/ratio-container";
+/* modules */
 
-@import "modules/404";
-@import "modules/archive";
-@import "modules/category";
 @import "modules/footer";
-@import "modules/front-page";
+@import "modules/form";
+@import "modules/grid";
 @import "modules/header";
-@import "modules/page";
-@import "modules/post";
+@import "modules/placeholder";
+@import "modules/ratio-container";
 @import "modules/sidebar";
-@import "modules/single";
+
+/* layouts */
+
+@import "layouts/404";
+@import "layouts/archive";
+@import "layouts/category";
+@import "layouts/front-page";
+@import "layouts/page";
+@import "layouts/post";

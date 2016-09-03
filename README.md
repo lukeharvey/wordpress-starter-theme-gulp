@@ -18,8 +18,7 @@ Features:
 
 ### Optional linters
 - ESLint & babel-eslint `$ npm install -g eslint babel-eslint`
-- JSCS `$ npm install -g jscs`
-- SCSS-Lint `gem install scss_lint`
+- Stylelint 'npm install -g stylelint'
 
 ### Setup
 ```

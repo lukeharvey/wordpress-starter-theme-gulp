@@ -41,7 +41,7 @@ function lh_setup() {
    * Register menus
    */
   register_nav_menus( array(
-    'primary' => esc_html__( 'Primary Menu', 'lh' ),
+    'header' => esc_html__( 'Header Menu', 'lh' ),
     // 'footer' => esc_html__( 'Footer Menu', 'lh' ),
   ) );
 
@@ -121,11 +121,15 @@ function lh_scripts() {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css' );
 
+      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', '', '', false );
+
       wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), '', true );
 
     } else {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css', array(), filemtime( get_template_directory() . '/dist/css/main.min.css' ) );
+
+      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', '', filemtime( get_template_directory() . '/dist/js/head.min.js' ), true );
 
       wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), filemtime( get_template_directory() . '/dist/js/main.min.js' ), true );
 
@@ -141,6 +145,11 @@ add_action( 'wp_enqueue_scripts', 'lh_scripts' );
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Custom function
+ */
+require get_template_directory() . '/inc/custom-functions.php';
 
 /**
  * Disable file editing
