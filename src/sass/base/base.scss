@@ -13,7 +13,6 @@
 html {
   -moz-osx-font-smoothing: grayscale; /* 1 */
   -webkit-font-smoothing: antialiased; /* 2 */
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -27,7 +26,7 @@ body {
 }
 
 /**
- * Reset font-weight of heading elements
+ * Reset font-weight of header elements
  */
 
 h1,
@@ -37,6 +36,25 @@ h4,
 h5,
 h6 {
   font-weight: $font-weight-default;
+}
+
+/**
+ * Reset the margin of these elements.
+ */
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure,
+p,
+pre {
+  margin: 0;
 }
 
 /**
@@ -64,15 +82,13 @@ a {
  *    `input` and others.
  */
 
-// scss-lint:disable QualifyingElement
+/* stylelint-disable selector-no-qualifying-type */
+
 button,
 html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
   cursor: pointer; /* 2 */
 }
-// scss-lint:enable QualifyingElement
 
-// select {
-//   -webkit-appearance: none;
-// }
+/* stylelint-enable selector-no-qualifying-type */

@@ -37,3 +37,22 @@ function lh_lazy_images( $attr ) {
 }
 add_filter( 'wp_get_attachment_image_attributes', 'lh_lazy_images', 10, 2 );
 add_filter( 'post_thumbmnail_html', 'lh_lazy_images', 10, 2 );
+
+/**
+ * Move jQuery to the HTML footer
+ *
+ * see https://peterwilson.cc/code-samples/load-jquery-in-the-wordpress-footer/
+ */
+
+function lh_jquery_to_footer( &$wp_scripts ) {
+
+  if ( is_admin() ) {
+    return;
+  }
+
+  $wp_scripts->add_data( 'jquery',         'group', 1 );
+  $wp_scripts->add_data( 'jquery-core',    'group', 1 );
+  $wp_scripts->add_data( 'jquery-migrate', 'group', 1 );
+
+}
+add_action( 'wp_default_scripts', 'lh_jquery_to_footer' );

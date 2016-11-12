@@ -20,6 +20,6 @@
     "browser": true
   },
   "globals": {
-    "$": true
+    "jQuery": true
   }
 }

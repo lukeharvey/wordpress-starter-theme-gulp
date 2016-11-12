@@ -69,10 +69,11 @@ $line-height-default: 1.5;
  * Breakpoints
  */
 
-$viewport-smaller: 400px;
+$viewport-xsmall: 480px;
 $viewport-small: 600px;
-$viewport-medium: 900px;
+$viewport-medium: 768px;
+$viewport-mlarge: 992px;
 $viewport-large: 1200px;
-$viewport-larger: 1400px;
+$viewport-xlarge: 1382px;
 $viewport-big: 1920px;
 $viewport-bigger: 2560px;

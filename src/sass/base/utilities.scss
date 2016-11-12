@@ -20,13 +20,30 @@
 }
 
 /**
+ * A clearfix solution
+ */
+
+.u-clearfix {
+
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+/**
  * Lazysizes config
  */
+
+/* stylelint-disable selector-no-qualifying-type */
 
 img[data-sizes="auto"] {
   display: block;
   width: 100%;
 }
+
+/* stylelint-enable selector-no-qualifying-type */
 
 .lazyload,
 .lazyloading {
@@ -35,7 +52,7 @@ img[data-sizes="auto"] {
 
 .lazyloaded {
   opacity: 1;
-  transition: opacity 300ms;
+  transition: opacity 200ms;
 }
 
 /**
