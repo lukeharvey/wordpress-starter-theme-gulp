@@ -103,20 +103,20 @@ gulp.task('js-main', function() {
     .pipe(gulp.dest('./dist/js/'));
 });
 
- /**
-  * Lint JS
-  *
-  * Lint the JavaScript files using ESLint
-  */
+/**
+ * Lint JS
+ *
+ * Lint the JavaScript files using ESLint
+ */
 
- gulp.task('lint-js', function() {
-  log('Linting the JavaScript files');
+gulp.task('lint-js', function() {
+log('Linting the JavaScript files');
 
-  return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
-     .pipe($.eslint())
-     .pipe($.eslint.format())
-     .pipe($.eslint.failAfterError());
- });
+return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
+  .pipe($.eslint())
+  .pipe($.eslint.format())
+  .pipe($.eslint.failAfterError());
+});
 
 /**
  * Build

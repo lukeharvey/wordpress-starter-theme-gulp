@@ -10,11 +10,13 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
+
 function lh_setup() {
 
   /**
    * Add default posts and comments RSS feed links to head.
    */
+
   add_theme_support( 'automatic-feed-links' );
 
   /**
@@ -23,6 +25,7 @@ function lh_setup() {
    * hard-coded <title> tag in the document head, and expect WordPress to
    * provide it for us.
    */
+
   add_theme_support( 'title-tag' );
 
   /**
@@ -30,6 +33,7 @@ function lh_setup() {
    *
    * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
    */
+
   add_theme_support( 'post-thumbnails' );
   //add_image_size( 'thumbnail', 150, 150, true ); // configured via the UI
   //add_image_size( 'medium', 300, 300, false ); // configured via the UI
@@ -40,6 +44,7 @@ function lh_setup() {
   /**
    * Register menus
    */
+
   register_nav_menus( array(
     'header' => esc_html__( 'Header Menu', 'lh' ),
     // 'footer' => esc_html__( 'Footer Menu', 'lh' ),
@@ -49,6 +54,7 @@ function lh_setup() {
    * Switch default core markup for search form, comment form, and comments
    * to output valid HTML5.
    */
+
   add_theme_support( 'html5', array(
     'search-form',
     'comment-form',
@@ -61,6 +67,7 @@ function lh_setup() {
    * Enable support for Post Formats.
    * See https://developer.wordpress.org/themes/functionality/post-formats/
    */
+
   // add_theme_support( 'post-formats', array(
   //   'aside',
   //   'image',
@@ -72,6 +79,7 @@ function lh_setup() {
   /**
    * Enable excerpts on 'pages'
    */
+
   //add_post_type_support( 'page', 'excerpt' );
 
   // Set up the WordPress core custom background feature.
@@ -79,6 +87,12 @@ function lh_setup() {
   //   'default-color' => 'ffffff',
   //   'default-image' => '',
   // ) ) );
+
+  /**
+   * Add theme support for selective refresh for widgets.
+   */
+
+  // add_theme_support( 'customize-selective-refresh-widgets' );
 }
 add_action( 'after_setup_theme', 'lh_setup' );
 
@@ -89,6 +103,7 @@ add_action( 'after_setup_theme', 'lh_setup' );
  *
  * @global int $content_width
  */
+
 function lh_content_width() {
   $GLOBALS['content_width'] = apply_filters( '_lh_content_width', 640 );
 }
@@ -99,6 +114,7 @@ add_action( 'after_setup_theme', 'lh_content_width', 0 );
  *
  * @link http://codex.wordpress.org/Function_Reference/register_sidebar
  */
+
 function lh_widgets_init() {
   register_sidebar( array(
     'name'          => esc_html__( 'Sidebar', 'lh' ),
@@ -115,21 +131,22 @@ add_action( 'widgets_init', 'lh_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
+
 function lh_scripts() {
 
-  if ( defined('WP_ENV') && 'WP_ENV' == 'development' ) {
+  if ( defined('WP_ENV') && WP_ENV == 'development' ) {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css' );
 
-      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', '', '', false );
+      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, null, false );
 
-      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), '', true );
+      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), null, true );
 
     } else {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css', array(), filemtime( get_template_directory() . '/dist/css/main.min.css' ) );
 
-      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', '', filemtime( get_template_directory() . '/dist/js/head.min.js' ), true );
+      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, filemtime( get_template_directory() . '/dist/js/head.min.js' ), true );
 
       wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), filemtime( get_template_directory() . '/dist/js/main.min.js' ), true );
 
@@ -142,17 +159,19 @@ function lh_scripts() {
 add_action( 'wp_enqueue_scripts', 'lh_scripts' );
 
 /**
- * Custom template tags for this theme.
+ * Include custom template tags
  */
+
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
- * Custom function
+ * Include custom functions
  */
+
 require get_template_directory() . '/inc/custom-functions.php';
 
 /**
- * Disable file editing
+ * Disable file editing completely
  */
-define( 'DISALLOW_FILE_EDIT', true );
 
+define( 'DISALLOW_FILE_EDIT', true );

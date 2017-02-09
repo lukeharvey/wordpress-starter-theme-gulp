@@ -5,6 +5,7 @@
  *
  * @param int $img_id Image ID.
  */
+
 function lh_image_ratio($img_id) {
   $img_data = wp_get_attachment_image_src( $img_id, 'original' );
   $img_width = $img_data[1];
@@ -17,6 +18,7 @@ function lh_image_ratio($img_id) {
 /**
  * Add lazyloading markup to responsive images
  */
+
 function lh_lazy_images( $attr ) {
   if ($attr['class'] == 'lazyload') {
     $src = $attr['src'];
