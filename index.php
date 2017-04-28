@@ -5,25 +5,29 @@
 
 get_header(); ?>
 
-  <?php if ( have_posts() ) : ?>
+  <main class="Main" role="main">
 
-    <section class="Index">
+    <?php if ( have_posts() ) : ?>
 
-      <?php while ( have_posts() ) : the_post(); ?>
+      <section class="Index">
 
-        <?php get_template_part( 'template-parts/post' ); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-      <?php endwhile; ?>
+          <?php get_template_part( 'template-parts/post', 'summary' ); ?>
 
-      <?php the_posts_navigation(); ?>
+        <?php endwhile; ?>
 
-    </section><!-- .Index -->
+        <?php the_posts_navigation(); ?>
 
-  <?php else : ?>
+      </section><!-- .Index -->
 
-    <?php get_template_part( 'template-parts/page', 'not-found' ); ?>
+    <?php else : ?>
 
-  <?php endif; ?>
+      <?php get_template_part( 'template-parts/page', 'empty' ); ?>
+
+    <?php endif; ?>
+
+  </main><!-- .Main -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

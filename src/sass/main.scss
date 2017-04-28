@@ -1,26 +1,34 @@
-@import "vendor/sanitize";
+/* 0-settings */
 
-/* base */
+@import "0-settings/variables";
 
-@import "base/config";
-@import "base/base";
-@import "base/utilities";
+/* 1-base */
 
-/* modules */
+@import "1-base/sanitize";
+@import "1-base/base";
+@import "1-base/utilities";
 
-@import "modules/footer";
-@import "modules/form";
-@import "modules/grid";
-@import "modules/header";
-@import "modules/placeholder";
-@import "modules/ratio-container";
-@import "modules/sidebar";
+/* 2-objects */
 
-/* layouts */
+@import "2-objects/button";
+@import "2-objects/form";
+@import "2-objects/placeholder";
+@import "2-objects/ratio-container";
 
-@import "layouts/404";
-@import "layouts/archive";
-@import "layouts/category";
-@import "layouts/front-page";
-@import "layouts/page";
-@import "layouts/post";
+/* 3-components */
+
+@import "3-components/footer";
+@import "3-components/header";
+@import "3-components/page";
+@import "3-components/post";
+@import "3-components/post-summary";
+@import "3-components/sidebar";
+
+/* 4-layouts */
+
+@import "4-layouts/404";
+@import "4-layouts/archive";
+@import "4-layouts/category";
+@import "4-layouts/front-page";
+@import "4-layouts/index";
+@import "4-layouts/search";

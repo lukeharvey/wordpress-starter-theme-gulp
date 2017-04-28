@@ -7,7 +7,7 @@ get_header(); ?>
 
   <main class="Main" role="main">
 
-    <?php get_template_part( 'template-parts/page', 'not-found' ); ?>
+    <?php get_template_part( 'template-parts/page', 'empty' ); ?>
 
   </main><!-- .Main -->
 

@@ -1,5 +1,5 @@
 /**
- * Gulpfile.js for _lh theme by Luke Harvey
+ * Gulpfile.js by Luke Harvey
  */
 
 'use strict';
@@ -35,13 +35,12 @@ gulp.task('default', ['help']);
  */
 
 gulp.task('sass', function() {
-  log('Processing the main Sass file');
-
   return gulp.src(['./src/sass/main.scss'])
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       precision: 10
-    }).on('error', $.sass.logError))
+    })
+    .on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['last 2 versions']}))
     .pipe($.cssnano())
     .pipe($.rename('main.min.css'))
@@ -58,8 +57,6 @@ gulp.task('sass', function() {
  */
 
 gulp.task('lint-sass', function() {
-  log('Linting all Sass files');
-
   return gulp.src('./src/sass/**/*.scss')
     .pipe($.stylelint({
       reporters: [{formatter: 'string', console: true}],
@@ -74,8 +71,6 @@ gulp.task('lint-sass', function() {
  */
 
 gulp.task('js-head', function() {
-  log('Processing JS head');
-
   return gulp.src(['./src/js/head/vendor/*.js', './src/js/head/modules/*.js'])
     .pipe($.sourcemaps.init())
     .pipe($.concat('head.min.js'))
@@ -92,9 +87,7 @@ gulp.task('js-head', function() {
  */
 
 gulp.task('js-main', function() {
-  log('Processing JS main');
-
- return gulp.src(['./src/js/main/vendor/featherlight.js', './src/js/main/vendor/jquery.waypoints.js', './src/js/main/vendor/*.js', './src/js/main/modules/*.js'])
+  return gulp.src(['./src/js/main/vendor/*.js', './src/js/main/modules/*.js'])
     .pipe($.sourcemaps.init())
     .pipe($.concat('main.min.js'))
     .pipe($.uglify({preserveComments: 'some'}))
@@ -110,12 +103,29 @@ gulp.task('js-main', function() {
  */
 
 gulp.task('lint-js', function() {
-log('Linting the JavaScript files');
+  return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError());
+});
 
-return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
-  .pipe($.eslint())
-  .pipe($.eslint.format())
-  .pipe($.eslint.failAfterError());
+/**
+ * Lint everything
+ */
+
+gulp.task('lint', function(done) {
+  return runSequence('lint-sass', 'lint-js', done);
+});
+
+/**
+ * Clean
+ *
+ * Clean the dist assets folder
+ */
+
+gulp.task('clean', function () {
+  return gulp.src('dist/*', {read: false})
+    .pipe($.clean());
 });
 
 /**
@@ -125,7 +135,7 @@ return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
  */
 
 gulp.task('build', function(done) {
-  runSequence('sass', 'js-head', 'js-main', done);
+  return runSequence('clean', 'sass', 'js-head', 'js-main', done);
 });
 
 /**
@@ -134,7 +144,7 @@ gulp.task('build', function(done) {
  * Run a Browsersync server and watch all the files.
  */
 
-gulp.task('serve', ['sass', 'js-head', 'js-main'], function() {
+gulp.task('serve', ['clean', 'sass', 'js-head', 'js-main'], function() {
 
   browserSync.init({
     proxy: config.url
@@ -146,20 +156,3 @@ gulp.task('serve', ['sass', 'js-head', 'js-main'], function() {
   gulp.watch(['./**/*.php']).on('change', browserSync.reload);
 
 });
-
-/**
- * Log a message or series of messages using chalk's blue color.
- * Can pass in a string, object or array.
- */
-
-var log = function(msg) {
-  if (typeof(msg) === 'object') {
-    for (var item in msg) {
-      if (msg.hasOwnProperty(item)) {
-        $.util.log($.util.colors.blue(msg[item]));
-      }
-    }
-  } else {
-    $.util.log($.util.colors.blue(msg));
-  }
-};

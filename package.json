@@ -1,16 +1,16 @@
 {
   "name": "lh",
   "description": "A WordPress starter theme by Luke Harvey",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "homepage": "https://github.com/lukeharvey/lh",
-  "author": {
-    "name": "Luke Harvey",
-    "url": "https://lukeharvey.co.uk"
-  },
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/lukeharvey/lh.git"
+  },
+  "author": {
+    "name": "Luke Harvey",
+    "url": "https://lukeharvey.co.uk"
   },
   "devDependencies": {
     "browser-sync": "^2.9.0",
@@ -19,6 +19,7 @@
     "eslint-plugin-import": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.5.2",
     "gulp-cssnano": "^2.1.2",
     "gulp-eslint": "^3.0.1",
@@ -33,9 +34,9 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "run-sequence": "^1.0.1",
-    "sanitize.css": "^4.1.0",
+    "sanitize.css": "^5.0.0",
     "stylelint": "^7.0.0",
-    "stylelint-config-suitcss": "^8.0.0"
+    "stylelint-config-suitcss": "^11.0.0"
   },
   "main": "gulpfile.js",
   "scripts": {

@@ -1,4 +1,4 @@
-/* v2.0.7 */
+/* v3.0.0 */
 (function(window, document, undefined){
   /*jshint eqnull:true */
   'use strict';
@@ -100,7 +100,7 @@
     var ascendingSort = function( a, b ) {
       return a.w - b.w;
     };
-    var regPxLength = /^\s*\d+px\s*$/;
+    var regPxLength = /^\s*\d+\.*\d*px\s*$/;
     var reduceCandidate = function (srces) {
       var lowerCandidate, bonusFactor;
       var len = srces.length;
