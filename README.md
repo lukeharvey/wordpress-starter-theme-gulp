@@ -26,7 +26,7 @@ $ git clone https://github.com/lukeharvey/lh.git
 $ cd lh
 $ npm install
 ```
-Then edit the `gulpfile.js` to set the URL.
+Then edit the `gulpfile.js` to set the correct URL.
 
 ## Developing 'lh'
 ```
