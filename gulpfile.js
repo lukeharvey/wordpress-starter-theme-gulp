@@ -37,14 +37,14 @@ gulp.task('default', ['help']);
 gulp.task('sass', function() {
   return gulp.src(['./src/sass/main.scss'])
     .pipe($.sourcemaps.init())
-    .pipe($.sass({
-      precision: 10
-    })
-    .on('error', $.sass.logError))
-    .pipe($.autoprefixer({browsers: ['last 2 versions']}))
-    .pipe($.cssnano())
-    .pipe($.rename('main.min.css'))
-    .pipe($.size({title: 'styles'}))
+      .pipe($.sass({
+        precision: 10
+      })
+      .on('error', $.sass.logError))
+      .pipe($.autoprefixer({browsers: ['last 2 versions']}))
+      .pipe($.cssnano())
+      .pipe($.rename('main.min.css'))
+      .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css/'))
     .pipe(browserSync.stream({match: '**/*.css'}));
@@ -73,9 +73,9 @@ gulp.task('lint-sass', function() {
 gulp.task('js-head', function() {
   return gulp.src(['./src/js/head/vendor/*.js', './src/js/head/modules/*.js'])
     .pipe($.sourcemaps.init())
-    .pipe($.concat('head.min.js'))
-    .pipe($.uglify({preserveComments: 'some'}))
-    .pipe($.size({title: 'scripts'}))
+      .pipe($.concat('head.min.js'))
+      .pipe($.uglify({output: {comments: 'some'}}))
+      .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -89,9 +89,9 @@ gulp.task('js-head', function() {
 gulp.task('js-main', function() {
   return gulp.src(['./src/js/main/vendor/*.js', './src/js/main/modules/*.js'])
     .pipe($.sourcemaps.init())
-    .pipe($.concat('main.min.js'))
-    .pipe($.uglify({preserveComments: 'some'}))
-    .pipe($.size({title: 'scripts'}))
+      .pipe($.concat('main.min.js'))
+      .pipe($.uglify({output: {comments: 'some'}}))
+      .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -135,7 +135,7 @@ gulp.task('clean', function () {
  */
 
 gulp.task('build', function(done) {
-  return runSequence('clean', 'sass', 'js-head', 'js-main', done);
+  return runSequence('clean', ['sass', 'js-head', 'js-main'], done);
 });
 
 /**
@@ -144,15 +144,17 @@ gulp.task('build', function(done) {
  * Run a Browsersync server and watch all the files.
  */
 
-gulp.task('serve', ['clean', 'sass', 'js-head', 'js-main'], function() {
+gulp.task('serve', function() {
 
-  browserSync.init({
-    proxy: config.url
+  return runSequence('clean', ['sass', 'js-head', 'js-main'], function() {
+    browserSync.init({
+      open: false,
+      proxy: config.url
+    });
+
+    gulp.watch(['./src/sass/**/*.scss'], ['sass']);
+    gulp.watch(['./src/js/head/**/*.js'], ['js-head', browserSync.reload]);
+    gulp.watch(['./src/js/main/**/*.js'], ['js-main', browserSync.reload]);
+    gulp.watch(['./**/*.php']).on('change', browserSync.reload);
   });
-
-  gulp.watch(['./src/sass/**/*.scss'], ['sass']);
-  gulp.watch(['./src/js/head/**/*.js'], ['js-head', browserSync.reload]);
-  gulp.watch(['./src/js/main/**/*.js'], ['js-main', browserSync.reload]);
-  gulp.watch(['./**/*.php']).on('change', browserSync.reload);
-
 });
