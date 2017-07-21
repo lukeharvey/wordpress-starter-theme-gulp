@@ -13,6 +13,13 @@
     </div>
   </header>
 
+  <?php /* Show featured image (if present) and add lazyloading markup */ ?>
+  <?php if ( has_post_thumbnail() ) : ?>
+    <div class="Post-thumbnail">
+      <?php the_post_thumbnail( 'large', array( 'class' => 'lazyload' ) ); ?>
+    </div>
+  <?php endif; ?>
+
   <div class="Post-content entry-content">
     <?php the_content(); ?>
   </div>

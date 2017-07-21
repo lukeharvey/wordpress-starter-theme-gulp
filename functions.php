@@ -35,11 +35,18 @@ function lh_setup() {
    */
 
   add_theme_support( 'post-thumbnails' );
-  //add_image_size( 'thumbnail', 150, 150, true ); // configured via the UI
-  //add_image_size( 'medium', 300, 300, false ); // configured via the UI
-  //add_image_size( 'medium-large', 540, 9999, false );
-  //add_image_size( 'large', 720, 720, false ); // configured via the UI
-  //add_image_size( 'extra-large', 1080, 9999, false );
+
+  /**
+   * Register additional Post Thumbnail sizes.
+   *
+   * Default sizes for reference:
+   * add_image_size( 'thumbnail', 150, 150, true );
+   * add_image_size( 'medium', 300, 300, false );
+   * add_image_size( 'medium_large', 768, '', false );
+   * add_image_size( 'large', 1024, 1024, false );
+   */
+
+  // add_image_size( 'extra_large', 1280, '', false );
 
   /**
    * Register menus
@@ -77,12 +84,15 @@ function lh_setup() {
   // ) );
 
   /**
-   * Enable excerpts on 'pages'
+   * Enable excerpts on 'pages'.
    */
 
-  //add_post_type_support( 'page', 'excerpt' );
+  // add_post_type_support( 'page', 'excerpt' );
 
-  // Set up the WordPress core custom background feature.
+  /**
+   * Set up the WordPress core custom background feature.
+   */
+
   // add_theme_support( 'custom-background', apply_filters( '_lh_custom_background_args', array(
   //   'default-color' => 'ffffff',
   //   'default-image' => '',
@@ -93,6 +103,7 @@ function lh_setup() {
    */
 
   // add_theme_support( 'customize-selective-refresh-widgets' );
+
 }
 add_action( 'after_setup_theme', 'lh_setup' );
 
@@ -108,6 +119,17 @@ function lh_content_width() {
   $GLOBALS['content_width'] = apply_filters( '_lh_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'lh_content_width', 0 );
+
+/**
+ * Register additional image sizes in Add Media modal
+ */
+
+// function lh_custom_image_sizes( $sizes ) {
+//   return array_merge( $sizes, array(
+//     'extra_large' => __( 'Extra Large' ),
+//   ) );
+// }
+// add_filter( 'image_size_names_choose', 'lh_custom_image_sizes' );
 
 /**
  * Register widget area.
@@ -134,21 +156,28 @@ add_action( 'widgets_init', 'lh_widgets_init' );
 
 function lh_scripts() {
 
-  if ( defined('WP_ENV') && WP_ENV == 'development' ) {
+  /**
+   * Cache busting of enqueued css and javascript on production environments
+   *
+   * To enable add the following line to wp-config.php on production environments only
+   * define( 'WP_ENV' , 'production');
+   */
 
-      wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css' );
-
-      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, null, false );
-
-      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), null, true );
-
-    } else {
+  if ( defined( 'WP_ENV' ) && WP_ENV == 'production' ) {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css', array(), filemtime( get_template_directory() . '/dist/css/main.min.css' ) );
 
       wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, filemtime( get_template_directory() . '/dist/js/head.min.js' ), true );
 
       wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), filemtime( get_template_directory() . '/dist/js/main.min.js' ), true );
+
+    } else {
+
+      wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css' );
+
+      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, null, false );
+
+      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), null, true );
 
     }
 
@@ -159,19 +188,19 @@ function lh_scripts() {
 add_action( 'wp_enqueue_scripts', 'lh_scripts' );
 
 /**
+ * Disable file editing within 'wp-admin' completely (good for security)
+ */
+
+define( 'DISALLOW_FILE_EDIT', true );
+
+/**
  * Include custom template tags
  */
 
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
- * Include custom functions
+ * Include custom commonly used functions
  */
 
-require get_template_directory() . '/inc/custom-functions.php';
-
-/**
- * Disable file editing completely
- */
-
-define( 'DISALLOW_FILE_EDIT', true );
+require get_template_directory() . '/inc/common-functions.php';

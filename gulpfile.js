@@ -15,7 +15,7 @@ var runSequence = require('run-sequence');
 var browserSync = require('browser-sync').create();
 
 var config = {
-  // make sure to change this url so that Browsersync works
+  // make sure to change this URL so that Browsersync works
   url: 'example.dev'
 };
 

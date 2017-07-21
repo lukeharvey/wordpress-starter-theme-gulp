@@ -1,8 +1,6 @@
 <?php
 /**
- * Custom template tags for this theme.
- *
- * Eventually, some of the functionality here could be replaced by core features.
+ * Custom template tags
  */
 
 /**
@@ -40,6 +38,7 @@ function lh_posted_on() {
  */
 
 function lh_post_footer() {
+
   // Hide category and tag text for pages.
   if ( 'post' == get_post_type() ) {
     /* translators: used between list items, there is a space after the comma */

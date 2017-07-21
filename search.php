@@ -27,7 +27,7 @@ get_header(); ?>
 
     <?php else : ?>
 
-      <?php get_template_part( 'template-parts/page', 'empty' ); ?>
+      <?php get_template_part( 'template-parts/page', 'none' ); ?>
 
     <?php endif; ?>
 

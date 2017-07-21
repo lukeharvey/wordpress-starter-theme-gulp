@@ -1,5 +1,5 @@
 /**
- * Example JS module
+ * Example JavaScript singleton module
  */
 
 // var Example = (function($) {

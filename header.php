@@ -17,20 +17,24 @@
 
   <header class="Header" role="banner">
 
-    <div class="Header-container">
+    <!-- <div class="Header-logo">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+        <div class="Svg Svg--logo">
+          <?php get_template_part( 'assets/svg/logo.svg' ); ?>
+        </div>
+      </a>
+    </div> -->
 
-      <h1 class="Header-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+    <h1 class="Header-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 
-      <h2 class="Header-description"><?php bloginfo( 'description' ); ?></h2>
+    <h2 class="Header-description"><?php bloginfo( 'description' ); ?></h2>
 
-      <nav class="Header-nav" role="navigation">
-        <?php wp_nav_menu( array(
-          'container' => 'false',
-          'menu_class' => 'Header-menu',
-          'theme_location' => 'primary'
-        ) ); ?>
-      </nav>
-
-    </div>
+    <nav class="Header-nav" role="navigation">
+      <?php wp_nav_menu( array(
+        'container' => false,
+        'menu_class' => 'Header-menu',
+        'theme_location' => 'header'
+      ) ); ?>
+    </nav>
 
   </header>

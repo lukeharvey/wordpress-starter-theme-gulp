@@ -39,7 +39,7 @@ h6 {
 }
 
 /**
- * Reset the margin of these elements.
+ * Reset margin of text elements
  */
 
 blockquote,
@@ -81,22 +81,22 @@ a {
 
 /* stylelint-disable selector-no-qualifying-type */
 
-img[data-sizes="auto"] {
-  display: block;
-  width: 100%;
-}
+// img[data-sizes="auto"] {
+//   display: block;
+//   width: 100%;
+// }
 
 /* stylelint-enable selector-no-qualifying-type */
 
-.lazyload,
-.lazyloading {
-  opacity: 0;
-}
+// .lazyload,
+// .lazyloading {
+//   opacity: 0;
+// }
 
-.lazyloaded {
-  opacity: 1;
-  transition: opacity 200ms;
-}
+// .lazyloaded {
+//   opacity: 1;
+//   transition: opacity 200ms;
+// }
 
 /**
  * Prevent Typekit FOUT

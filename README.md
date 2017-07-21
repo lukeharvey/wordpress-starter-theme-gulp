@@ -8,6 +8,7 @@ Features:
 - [Gulp](http://gulpjs.com/) for asset optimisation and compilation
 - [BrowserSync](http://www.browsersync.io/) for live browser reloading
 - [Suit CSS](http://suitcss.github.io/) naming conventions
+- [lazysizes](https://github.com/aFarkas/lazysizes) for lazyloading images
 
 ## Getting started
 
@@ -26,7 +27,7 @@ $ git clone https://github.com/lukeharvey/lh.git
 $ cd lh
 $ npm install
 ```
-Then edit the `gulpfile.js` to set the correct URL.
+Then edit `gulpfile.js` to set the correct proxy URL for Browsersync.
 
 ## Developing 'lh'
 ```

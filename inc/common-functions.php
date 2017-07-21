@@ -1,4 +1,7 @@
 <?php
+/**
+ * Custom commonly used functions
+ */
 
 /**
  * Output image ratio.
@@ -16,22 +19,19 @@ function lh_image_ratio($img_id) {
 }
 
 /**
- * Add lazyloading markup to responsive images
+ * Add lazyloading markup to responsive images.
  */
 
 function lh_lazy_images( $attr ) {
   if ($attr['class'] == 'lazyload') {
-    $src = $attr['src'];
     $srcset = isset($attr['srcset']) ? $attr['srcset'] : '';
 
     $attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-    $attr['data-src'] = $src;
+    $attr['data-src'] = $attr['src'];
 
     if ( !empty( $srcset ) ) {
-      $attr['sizes'] = '';
-      $attr['data-sizes'] = 'auto';
-      $attr['srcset'] = '';
-      $attr['data-srcset'] = $srcset;
+      $attr['data-sizes'] = $attr['sizes'];
+      $attr['data-srcset'] = $attr['srcset'];
     }
   }
 
@@ -41,7 +41,7 @@ add_filter( 'wp_get_attachment_image_attributes', 'lh_lazy_images', 10, 2 );
 add_filter( 'post_thumbmnail_html', 'lh_lazy_images', 10, 2 );
 
 /**
- * Move jQuery to the HTML footer
+ * Move jQuery to the HTML footer.
  *
  * see https://peterwilson.cc/code-samples/load-jquery-in-the-wordpress-footer/
  */
