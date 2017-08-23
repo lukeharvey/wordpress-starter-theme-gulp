@@ -157,27 +157,23 @@ add_action( 'widgets_init', 'lh_widgets_init' );
 function lh_scripts() {
 
   /**
-   * Cache busting of enqueued css and javascript on production environments
+   * Enable cache busting of enqueued css and javascript
    *
-   * To enable add the following line to wp-config.php on production environments only
-   * define( 'WP_ENV' , 'production');
+   * To disable add the following line to wp-config.php
+   * define( 'WP_ENV' , 'production' );
    */
 
-  if ( defined( 'WP_ENV' ) && WP_ENV == 'production' ) {
-
-      wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css', array(), filemtime( get_template_directory() . '/dist/css/main.min.css' ) );
-
-      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, filemtime( get_template_directory() . '/dist/js/head.min.js' ), true );
-
-      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), filemtime( get_template_directory() . '/dist/js/main.min.js' ), true );
-
-    } else {
+  if ( defined( 'WP_ENV' ) && WP_ENV == 'development' ) {
 
       wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css' );
 
-      wp_enqueue_script( 'head-js', get_template_directory_uri() . '/dist/js/head.min.js', null, null, false );
-
       wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), null, true );
+
+    } else {
+
+      wp_enqueue_style( 'main-css', get_template_directory_uri() . '/dist/css/main.min.css', array(), filemtime( get_template_directory() . '/dist/css/main.min.css' ) );
+
+      wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), filemtime( get_template_directory() . '/dist/js/main.min.js' ), true );
 
     }
 

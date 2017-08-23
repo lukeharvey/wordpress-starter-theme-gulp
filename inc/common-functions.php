@@ -24,14 +24,14 @@ function lh_image_ratio($img_id) {
 
 function lh_lazy_images( $attr ) {
   if ($attr['class'] == 'lazyload') {
-    $srcset = isset($attr['srcset']) ? $attr['srcset'] : '';
-
-    $attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
     $attr['data-src'] = $attr['src'];
+    $attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
-    if ( !empty( $srcset ) ) {
-      $attr['data-sizes'] = $attr['sizes'];
+    if ( isset($attr['srcset']) ) {
       $attr['data-srcset'] = $attr['srcset'];
+      $attr['srcset'] = '';
+      $attr['data-sizes'] = 'auto';
+      $attr['sizes'] = '';
     }
   }
 

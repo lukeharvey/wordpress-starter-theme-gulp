@@ -15,13 +15,11 @@ var runSequence = require('run-sequence');
 var browserSync = require('browser-sync').create();
 
 var config = {
-  // make sure to change this URL so that Browsersync works
+  // make sure to change this url so that Browsersync works
   url: 'example.dev'
 };
 
 /**
- * Help
- *
  * List the available gulp tasks
  */
 
@@ -65,29 +63,13 @@ gulp.task('lint-sass', function() {
 });
 
 /**
- * JS Head
+ * JS
  *
- * Process the Javascript files for inclusion in the <head>
+ * Process the JavaScript files
  */
 
-gulp.task('js-head', function() {
-  return gulp.src(['./src/js/head/vendor/*.js', './src/js/head/modules/*.js'])
-    .pipe($.sourcemaps.init())
-      .pipe($.concat('head.min.js'))
-      .pipe($.uglify({output: {comments: 'some'}}))
-      .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('./dist/js/'));
-});
-
-/**
- * JS Main
- *
- * Process the main Javascript files
- */
-
-gulp.task('js-main', function() {
-  return gulp.src(['./src/js/main/vendor/*.js', './src/js/main/modules/*.js'])
+gulp.task('js', function() {
+  return gulp.src(['./src/js/**/*.js'])
     .pipe($.sourcemaps.init())
       .pipe($.concat('main.min.js'))
       .pipe($.uglify({output: {comments: 'some'}}))
@@ -103,7 +85,7 @@ gulp.task('js-main', function() {
  */
 
 gulp.task('lint-js', function() {
-  return gulp.src(['./src/js/head/modules/*.js', './src/js/main/modules/*.js'])
+  return gulp.src(['./src/js/**/*.js'])
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError());
@@ -135,7 +117,7 @@ gulp.task('clean', function () {
  */
 
 gulp.task('build', function(done) {
-  return runSequence('clean', ['sass', 'js-head', 'js-main'], done);
+  return runSequence('clean', ['sass', 'js'], done);
 });
 
 /**
@@ -146,15 +128,14 @@ gulp.task('build', function(done) {
 
 gulp.task('serve', function() {
 
-  return runSequence('clean', ['sass', 'js-head', 'js-main'], function() {
+  return runSequence('clean', ['sass', 'js'], function() {
     browserSync.init({
       open: false,
       proxy: config.url
     });
 
     gulp.watch(['./src/sass/**/*.scss'], ['sass']);
-    gulp.watch(['./src/js/head/**/*.js'], ['js-head', browserSync.reload]);
-    gulp.watch(['./src/js/main/**/*.js'], ['js-main', browserSync.reload]);
+    gulp.watch(['./src/js/**/*.js'], ['js', browserSync.reload]);
     gulp.watch(['./**/*.php']).on('change', browserSync.reload);
   });
 });

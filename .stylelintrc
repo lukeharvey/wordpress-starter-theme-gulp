@@ -23,7 +23,6 @@
       "resolveNestedSelectors": true
     } ],
     "selector-max-empty-lines": 0,
-    "selector-no-id": true,
     "selector-no-qualifying-type": true,
     "selector-pseudo-class-case": "lower",
     "selector-pseudo-class-no-unknown": true,
