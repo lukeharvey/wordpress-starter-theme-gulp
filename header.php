@@ -10,8 +10,8 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <script>document.documentElement.className+=' js-enabled';</script>
-<?php get_template_part('inc/js/webfontloader.js'); ?>
-<?php get_template_part('inc/js/lazysizes.js'); ?>
+<?php #get_template_part('inc/js/webfontloader.js'); ?>
+<?php #get_template_part('inc/js/lazysizes.js'); ?>
 <?php wp_head(); ?>
 </head>
 
