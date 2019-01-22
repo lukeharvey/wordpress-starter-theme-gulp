@@ -26,7 +26,7 @@ Features:
 ### Setup
 
 ```
-$ git clone https://github.com/lukeharvey/wordpress-starter-theme-gulp.git
+$ git clone https://github.com/lukeharvey/wordpress-starter-theme-gulp.git lh
 $ cd lh
 $ npm install
 ```
